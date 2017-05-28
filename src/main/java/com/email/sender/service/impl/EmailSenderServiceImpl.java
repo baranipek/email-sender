@@ -1,6 +1,6 @@
 package com.email.sender.service.impl;
 
-import com.email.sender.model.type.EmailType;
+import com.email.sender.type.EmailType;
 import com.email.sender.service.EmailSenderService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.mail.Email;

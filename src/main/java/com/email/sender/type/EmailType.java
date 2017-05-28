@@ -1,4 +1,4 @@
-package com.email.sender.model.type;
+package com.email.sender.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

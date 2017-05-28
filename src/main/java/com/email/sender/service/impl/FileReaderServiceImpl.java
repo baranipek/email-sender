@@ -2,7 +2,7 @@ package com.email.sender.service.impl;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.email.sender.exception.OperationIsStillInProgressException;
-import com.email.sender.model.type.EmailType;
+import com.email.sender.type.EmailType;
 import com.email.sender.service.FileReaderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.atomic.AtomicInteger;

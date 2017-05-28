@@ -1,7 +1,7 @@
 package com.email.sender.service;
 
 
-import com.email.sender.model.type.EmailType;
+import com.email.sender.type.EmailType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.mail.EmailException;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -16,9 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class KafkaListenerService {
-
-
     private final EmailSenderService emailSenderService;
+
     private static final String EMAIL_TOPIC_NAME = "EmailTopicTest";
 
     @Autowired
