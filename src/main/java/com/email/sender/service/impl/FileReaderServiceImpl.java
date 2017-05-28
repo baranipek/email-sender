@@ -14,8 +14,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Scope(value = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -26,7 +28,7 @@ class FileReaderServiceImpl implements FileReaderService {
 
     private KafkaTemplate kafkaTemplate;
 
-    private static final String EMAIL_TOPIC_NAME = "re";
+    private static final String EMAIL_TOPIC_NAME = "EmailTopicTest";
 
     @Value("${file.directory}")
     private String filePath;
@@ -46,15 +48,14 @@ class FileReaderServiceImpl implements FileReaderService {
      */
     void readFile(String filePath) throws IOException {
 
-        CSVReader csvReader;
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(filePath), "UTF-8");
+        CSVReader csvReader = new CSVReader(inputStreamReader, ';');
 
         /**
          * Reading the CSV File
          * Delimiter is semicolon
          * Start reading from line 1
          */
-        csvReader = new CSVReader(new FileReader(filePath), ';');
-
         String[] emailData;
 
         int TOTAL_COLUMN_VALUE = 3;

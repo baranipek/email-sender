@@ -12,18 +12,14 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.CountDownLatch;
-
 @Scope(value = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Service
 @Slf4j
 public class KafkaListenerService {
-    public final CountDownLatch countDownLatch0 = new CountDownLatch(3);
-    public final CountDownLatch countDownLatch1 = new CountDownLatch(3);
-    public final CountDownLatch countDownLatch2 = new CountDownLatch(3);
+
 
     private final EmailSenderService emailSenderService;
-    private static final String EMAIL_TOPIC_NAME = "re";
+    private static final String EMAIL_TOPIC_NAME = "EmailTopicTest";
 
     @Autowired
     public KafkaListenerService(EmailSenderService emailSenderService) {
@@ -35,8 +31,6 @@ public class KafkaListenerService {
     public void listenEmailPartition0(ConsumerRecord<?, ?> record) throws InterruptedException, EmailException {
         Thread.sleep(500);
         emailSenderService.sendEmail((EmailType) record.value());
-        log.info("EmailType Send By Thread" + Thread.currentThread().getId());
-        countDownLatch0.wait();
     }
 
     /** * Listen partition 1*/
@@ -44,9 +38,6 @@ public class KafkaListenerService {
     public void listenEmailPartition1(ConsumerRecord<?, ?> record) throws InterruptedException, EmailException {
         Thread.sleep(500);
         emailSenderService.sendEmail((EmailType) record.value());
-        log.info("EmailType Send By Thread" + Thread.currentThread().getId());
-        countDownLatch1.wait();
-
     }
 
     /** * Listen partition 2*/
@@ -54,8 +45,5 @@ public class KafkaListenerService {
     public void listenEmailPartition2(ConsumerRecord<?, ?> record) throws InterruptedException, EmailException {
         Thread.sleep(500);
         emailSenderService.sendEmail((EmailType) record.value());
-        log.info("EmailType Send By Thread" + Thread.currentThread().getId());
-        countDownLatch2.wait();
-
     }
 }
