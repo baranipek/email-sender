@@ -26,8 +26,7 @@ and watch the logs.
 
 ## How
 
-The huge csv file is read line by line because in case of reading all line in huge file makes you
-trouble,some says out of memory :) .After reading file the application sends object to to kafka
+The huge csv file is read line by line .After reading file line, the application sends object to to kafka
 topic which is divided 3 partition and  here is kafka-multi-threaded-consumption. Each listener
 waits 0.5 second and send to mock email service.Docker compose up kafka and zookeeper images and
 linked each other run dependently. In case of failure of the application kafka listener continues
